@@ -1,27 +1,29 @@
-import React from 'react'
-import {ListGroup,Button,Col} from "react-bootstrap"
+import React from "react";
+import { ButtonGroup, Button } from "react-bootstrap";
+import { Highttolow,rating}  from "./atoms"
+import { useAtom } from 'jotai'
 
 const Filter = () => {
+  const [hightolowprod,setHightolowprod]=useAtom(Highttolow)
+  const[productbyrating , setProductbyrating] = useAtom(rating)
+  
+  
+  
+ 
+
   return (
     <>
-    <div className='border border-dark text-center p-2  '>
-    <h4> Filter </h4>
-    <ListGroup as="ul">
-        <ListGroup.Item as="li" active>
-            High To Low
-        </ListGroup.Item>
-        <ListGroup.Item as="li">Low To High</ListGroup.Item>
-        < ListGroup.Item as="li" disabled>
-            Filter By Rating
-        </ListGroup.Item>
-        <ListGroup.Item as="li">Porta ac consectetur ac</ListGroup.Item>
-    </ListGroup>
-    <Col className="text-center">
-    <Button variant="success">Clear All </Button>
-    </Col>
-    </div>
+      <ButtonGroup vertical>
+        <Button onClick={()=>
+          setHightolowprod(!hightolowprod)
+        }>{hightolowprod?"High to Low":"Low to High"}</Button>
+       
+        <Button onClick={()=>{
+          setProductbyrating(!productbyrating)
+        }}>{productbyrating?"worst to high" :"high to worse"}</Button>
+      </ButtonGroup>
     </>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;

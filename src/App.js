@@ -1,8 +1,7 @@
 import Header from "./component/Header";
-import Product from "./component/Product";
-import Filter from "./component/Filter";
+
 import Footer from "./component/Footer";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "./App.css";
 import {
   QueryClient,
@@ -10,30 +9,35 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Provider } from "jotai";
+import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Cart from "./component/Cart";
+import Home from "./component/Home";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
+    <Provider>
     <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
       <div className="App bg-light">
         <Container fluid>
           <Header />
         </Container>
-        <Container fluid className="p-3  d-flex align-items-stretch">
-          <Row>
-            <Col xs lg="2">
-              <Filter />
-            </Col>
-            <Col xs lg="10" >
-              <Product />
-            </Col>
-          </Row>
+        <Container>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+          </Routes>
         </Container>
         <Footer />
       </div>
+      
       <ReactQueryDevtools initialIsOpen />
+      </BrowserRouter>
     </QueryClientProvider>
+    </Provider>
   );
 }
 

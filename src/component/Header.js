@@ -1,6 +1,11 @@
 import React from 'react'
 import {Navbar,Form,Button,FormControl,Nav} from "react-bootstrap"
+import { searchbyquery } from './atoms'
+import { useAtom } from 'jotai'
+import { Link } from 'react-router-dom'
+
 const Header = () => {
+  const [searchprod , setSearchprod]= useAtom(searchbyquery)
   return (
     <>
     <Navbar bg="primary" variant="dark">
@@ -10,9 +15,10 @@ const Header = () => {
       
     </Nav>
     <Form className="d-flex">
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" value={searchprod} onChange={(e)=>setSearchprod(e.target.value)}/>
       <Button variant="outline-light">Search</Button>
     </Form>
+    <Link to='/cart'><Button variant="outline-success">Cart</Button></Link>
   </Navbar>
     </>
   )
