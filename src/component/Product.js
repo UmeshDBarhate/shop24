@@ -58,7 +58,7 @@ const Product = () => {
   return(
     <>
     
-    <div className="container-product">
+    <div className="container-product ">
       {Filterbycondition().map((prod)=>{return(
         <SingleProduct key={prod.id} apidata={prod}/>
       )})}

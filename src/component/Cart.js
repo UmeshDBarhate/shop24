@@ -15,6 +15,7 @@ const Cart = () => {
     <>
       {cartitem.map((prod) => {
         return (
+          
           <Card key={prod.id}>
             <Card.Header>{prod.id}</Card.Header>
             <Card.Body>
@@ -26,6 +27,7 @@ const Cart = () => {
                 deleteitem(prod.id)}>Delete</Button>
             </Card.Body>
           </Card>
+          
         );
       })}
     </>

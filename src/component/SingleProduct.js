@@ -1,37 +1,52 @@
-import React from 'react'
-import { Card,Button, } from "react-bootstrap";
-import { cart } from './atoms';
-import { Atom,useAtom } from 'jotai';
+import React from "react";
+import { Card } from "react-bootstrap";
 
-const SingleProduct = ({apidata}) => {
-  const[addtocart,setAddtocart]=useAtom(cart)
+import { useAtom } from "jotai";
+import { Button } from "react-bootstrap";
 
-  const item= {
-    "id":apidata.id,
-    "itemName":apidata.title,
-    "itemPrice":apidata.price,
-  }
-    
+const SingleProduct = ({ apidata }) => {
+  const [addtocart, setAddtocart] = useAtom(cart);
+
+  const item = {
+    id: apidata.id,
+    itemName: apidata.title,
+    itemPrice: apidata.price,
+  };
+
   return (
     <>
-    <Card style={{ width: "18rem" }} >
-    <Card.Img variant="top" src={apidata.image} />
-    <Card.Body>
-      <Card.Title>{apidata.title}</Card.Title>
-      
-      <Card.Text>{apidata.price}</Card.Text>
-      <Card.Text>{apidata.rating.rate}</Card.Text>
-      
-      <Button variant="primary" className="d-fex align-item-center" onClick={()=>setAddtocart([...addtocart,item])}>Add To Cart</Button>
-     
-    </Card.Body>
-  </Card> 
+      <div className="singlecard">
+        <Card style={{ width: "18rem" }}>
+          <Card.Img
+            variant="top"
+            src={apidata.image}
+            className="card-img-top"
+          />
+          <Card.Body>
+            <Card.Title>{apidata.title}</Card.Title>
 
+            <Card.Text>{apidata.price}</Card.Text>
+            <Card.Text>{apidata.rating.rate}</Card.Text>
 
+            {addtocart.some((p) => p.id === apidata.id) ? (
+              <Button disabled={true}>Aleredy Added</Button>
+            ) : (
+              <Button
+                variant="primary"
+                className="d-fex align-item-center"
+                id="addtocart"
+                onClick={() => {
+                  setAddtocart([...addtocart, item]);
+                }}
+              >
+                Add to Cart
+              </Button>
+            )}
+          </Card.Body>
+        </Card>
+      </div>
     </>
-    
-  )
-}
+  );
+};
 
-export default SingleProduct
-
+export default SingleProduct;
