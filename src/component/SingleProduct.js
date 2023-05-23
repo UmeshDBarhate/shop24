@@ -1,11 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-
+import { cart } from './atoms';
 import { useAtom } from "jotai";
 import { Button } from "react-bootstrap";
 
 const SingleProduct = ({ apidata }) => {
-  const [addtocart, setAddtocart] = useAtom(cart);
+  const [addtocart, setAddtocart] = useAtom(cart)
 
   const item = {
     id: apidata.id,
